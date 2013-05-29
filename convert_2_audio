@@ -6,10 +6,12 @@ do
 	then
 		avconv -i "${FILE}" -vn -acodec libvorbis "${TARGET}.ogg"
 	fi
+	TARGET=$(basename "${FILE}" .m4a)
 	if [[ ! -e "m4a/${TARGET}.m4a" && ! -f "m4a/${TARGET}.m4a" && ! -e "${TARGET}.m4a" && ! -f "${TARGET}.m4a" ]]
 	then
 		ffmpeg -i "${FILE}" -vn -acodec copy "${TARGET}.m4a"
 	fi
+	TARGET=$(basename "${FILE}" .m4a)
 	if [[ ! -e "mp3/${TARGET}.mp3" && ! -f "mp3/${TARGET}.mp3" && ! -e "${TARGET}.mp3" && ! -f "${TARGET}.mp3" ]]
 	then
 		ffmpeg -b 192k -i "${FILE}" -vn -acodec copy "${TARGET}.mp3"
